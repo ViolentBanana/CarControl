@@ -1,0 +1,191 @@
+2025-06-04 07:49:21 +0000 [MT] Initial pipeline context: <IDEDistributionProcessingPipelineContext: 0x7fa4cab8cfb0; archive(resolved)="<IDEArchive: 0x600002d68850>", distributionTask(resolved)="2", distributionDestination(resolved)="1", distributionMethod(resolved)="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team(resolved)="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	Chain (14, self inclusive):
+	<IDEDistributionProcessingPipelineContext: 0x7fa4cab8cfb0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionProcessingPipelineContext: 0x7fa4cab8cd20; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4cab8cb10; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4cab7c8a0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4cab85110; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4cab826a0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4c9754fe0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4c9754dd0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4caa328c0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="<IDEProvisioningBasicTeam: 0x60000077aa40; teamID='M6WW22878N', teamName='方旭 陈'>">
+	<IDEDistributionContext: 0x7fa4c974ae90; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="(null)">
+	<IDEDistributionContext: 0x7fa4cab7a9e0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="(null)">
+	<IDEDistributionContext: 0x7fa4ca83d1d0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="(null)">
+	<IDEDistributionContext: 0x7fa4ca83a490; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="<IDEDistributionMethodDevelopmentSigned: 0x600000499600>", team="(null)">
+	<IDEDistributionContext: 0x7fa4c972fdc0; archive = "<IDEArchive: 0x600002d68850>", distributionMethod="(null)", team="(null)">
+</IDEDistributionProcessingPipelineContext: 0x7fa4cab8cfb0>
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionCreateDestRootStep
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionCopyItemStep
+2025-06-04 07:49:21 +0000 [MT] Running /usr/bin/ditto '-V' '/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app' '/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app'
+2025-06-04 07:49:21 +0000  >>> Copying /Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app 
+2025-06-04 07:49:21 +0000  copying file ./_CodeSignature/CodeResources ... 
+2025-06-04 07:49:21 +0000  3349 bytes for ./_CodeSignature/CodeResources
+2025-06-04 07:49:21 +0000  copying file ./CarControl ... 
+2025-06-04 07:49:21 +0000  190336 bytes for ./CarControl
+2025-06-04 07:49:21 +0000  copying file ./PlugIns/CarControlWidgetExtension.appex/_CodeSignature/CodeResources ... 
+2025-06-04 07:49:21 +0000  2040 bytes for ./PlugIns/CarControlWidgetExtension.appex/_CodeSignature/CodeResources
+2025-06-04 07:49:21 +0000  copying file ./PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension ... 
+2025-06-04 07:49:21 +0000  95232 bytes for ./PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension
+2025-06-04 07:49:21 +0000  copying file ./PlugIns/CarControlWidgetExtension.appex/embedded.mobileprovision ... 
+2025-06-04 07:49:21 +0000  16397 bytes for ./PlugIns/CarControlWidgetExtension.appex/embedded.mobileprovision
+2025-06-04 07:49:21 +0000  copying file ./PlugIns/CarControlWidgetExtension.appex/Info.plist ... 
+2025-06-04 07:49:21 +0000  920 bytes for ./PlugIns/CarControlWidgetExtension.appex/Info.plist
+2025-06-04 07:49:21 +0000  copying file ./embedded.mobileprovision ... 
+2025-06-04 07:49:21 +0000  16278 bytes for ./embedded.mobileprovision
+2025-06-04 07:49:21 +0000  copying file ./Info.plist ... 
+2025-06-04 07:49:21 +0000  1567 bytes for ./Info.plist
+2025-06-04 07:49:21 +0000  copying file ./PkgInfo ... 
+2025-06-04 07:49:21 +0000  8 bytes for ./PkgInfo
+2025-06-04 07:49:21 +0000 [MT] /usr/bin/ditto exited with 0
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionEmbedProfileStep
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionInfoPlistStep
+2025-06-04 07:49:21 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2025-06-04 07:49:21 +0000 [MT] Skipping step: IDEDistributionInfoPlistStep because it said so
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionAppThinningPlistStep
+2025-06-04 07:49:21 +0000 [MT] Skipping step: IDEDistributionAppThinningPlistStep because it said so
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionSymbolsStep
+2025-06-04 07:49:21 +0000 [MT] Skipping step: IDEDistributionSymbolsStep because it said so
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionAppThinningStep
+2025-06-04 07:49:21 +0000 [MT] Skipping step: IDEDistributionAppThinningStep because it said so
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionArchThinningStep
+2025-06-04 07:49:21 +0000 [MT] Item /Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex doesn't have the entitlement com.apple.developer.web-browser-engine.host enabled, returning ["arm64e"]
+2025-06-04 07:49:21 +0000 [MT] Archs to thin for item /Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex are ["arm64e"]
+2025-06-04 07:49:21 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension' '-verify_arch' 'arm64e'
+2025-06-04 07:49:21 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2025-06-04 07:49:21 +0000 [MT] Skipping architecture thinning for item "CarControlWidgetExtension" because arch "arm64e" wasn't found
+2025-06-04 07:49:21 +0000 [MT] Item /Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app doesn't have the entitlement com.apple.developer.web-browser-engine.host enabled, returning ["arm64e"]
+2025-06-04 07:49:21 +0000 [MT] Archs to thin for item /Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app are ["arm64e"]
+2025-06-04 07:49:21 +0000 [MT] Running /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo '/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/CarControl' '-verify_arch' 'arm64e'
+2025-06-04 07:49:21 +0000 [MT] /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/lipo exited with 1
+2025-06-04 07:49:21 +0000 [MT] Skipping architecture thinning for item "CarControl" because arch "arm64e" wasn't found
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionODRStep
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionStripXattrsStep
+2025-06-04 07:49:21 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2025-06-04 07:49:21 +0000 [MT] Skipping stripping extended attributes because the codesign step will strip them.
+2025-06-04 07:49:21 +0000 [MT] Processing step: IDEDistributionCodesignStep
+2025-06-04 07:49:21 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000226e460; bundleID='com.chen.CarControl.CarControlWidget', path='<DVTFilePath:0x600002d693b0:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002283540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033d4b40; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl.CarControlWidget";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl.CarControlWidget', executablePath='<DVTFilePath:0x600002d69180:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "M6WW22878N.com.chen.CarControl.CarControlWidget";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}
+2025-06-04 07:49:21 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2025-06-04 07:49:21 +0000 [MT] Entitlements for <IDEDistributionItem: 0x60000226e460; bundleID='com.chen.CarControl.CarControlWidget', path='<DVTFilePath:0x600002d693b0:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002283540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033d4b40; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl.CarControlWidget";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl.CarControlWidget', executablePath='<DVTFilePath:0x600002d69180:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "M6WW22878N.com.chen.CarControl.CarControlWidget";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}
+2025-06-04 07:49:21 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x60000226e460; bundleID='com.chen.CarControl.CarControlWidget', path='<DVTFilePath:0x600002d693b0:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002283540; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033eae80; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl.CarControlWidget";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl.CarControlWidget', executablePath='<DVTFilePath:0x600002d69180:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension'>', hardenedRuntime='0'>'> to: /var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/entitlements~~~v217o6
+2025-06-04 07:49:21 +0000 [MT] invoking codesign: <NSConcreteTask: 0x6000026d4500; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7,
+    "--entitlements",
+    "/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/entitlements~~~v217o6",
+    "--preserve-metadata=identifier,flags,runtime",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex"
+)'>
+2025-06-04 07:49:22 +0000 [MT] codesign output: /var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex: replacing existing signature
+/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex: signed bundle with Mach-O thin (arm64) [com.chen.CarControl.CarControlWidget]
+2025-06-04 07:49:22 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002264cc0; bundleID='com.chen.CarControl', path='<DVTFilePath:0x600002281200:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002264720; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033d4b40; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl', executablePath='<DVTFilePath:0x600002285860:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/CarControl'>', hardenedRuntime='0'>'>: {
+    "application-identifier" = "M6WW22878N.com.chen.CarControl";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}
+2025-06-04 07:49:22 +0000 [MT] Associated App Clip Identifiers Filter: Skipping because "com.apple.developer.associated-appclip-app-identifiers" is not present
+2025-06-04 07:49:22 +0000 [MT] Entitlements for <IDEDistributionItem: 0x600002264cc0; bundleID='com.chen.CarControl', path='<DVTFilePath:0x600002281200:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002264720; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033d4d80; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl', executablePath='<DVTFilePath:0x600002285860:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/CarControl'>', hardenedRuntime='0'>'> are: {
+    "application-identifier" = "M6WW22878N.com.chen.CarControl";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}
+2025-06-04 07:49:22 +0000 [MT] Writing entitlements for <IDEDistributionItem: 0x600002264cc0; bundleID='com.chen.CarControl', path='<DVTFilePath:0x600002281200:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app'>', codeSigningInfo='<_DVTCodeSigningInformation_Path: 0x600002264720; isSigned='1', isAdHocSigned='0', signingCertificate='<DVTSigningCertificate: 0x6000033d4d80; name='Apple Development: 921326671@qq.com (2XSD977LT7)', hash='E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7', serialNumber='7B07688F208B1CB233EBE3F36F531760', certificateKinds='(
+    "1.2.840.113635.100.6.1.12",
+    "1.2.840.113635.100.6.1.2"
+), issueDate='2025-06-03 02:19:44 +0000''>', entitlements='{
+    "application-identifier" = "M6WW22878N.com.chen.CarControl";
+    "com.apple.developer.team-identifier" = M6WW22878N;
+    "get-task-allow" = 1;
+}', teamID='M6WW22878N', identifier='com.chen.CarControl', executablePath='<DVTFilePath:0x600002285860:'/Users/chen/Documents/dev_project/xcodeproject/CarControl/build/CarControl.xcarchive/Products/Applications/CarControl.app/CarControl'>', hardenedRuntime='0'>'> to: /var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/entitlements~~~CnXNqj
+2025-06-04 07:49:22 +0000 [MT] invoking codesign: <NSConcreteTask: 0x6000026b83c0; launchPath='/usr/bin/codesign', arguments='(
+    "-f",
+    "-s",
+    E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7,
+    "--entitlements",
+    "/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/entitlements~~~CnXNqj",
+    "--preserve-metadata=identifier,flags,runtime",
+    "--generate-entitlement-der",
+    "--strip-disallowed-xattrs",
+    "-vvv",
+    "/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app"
+)'>
+2025-06-04 07:49:22 +0000 [MT] codesign output: /var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app: replacing existing signature
+/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app: signed app bundle with Mach-O thin (arm64) [com.chen.CarControl]
+2025-06-04 07:49:22 +0000 [MT] Processing step: IDEDistributionZipODRItemStep
+2025-06-04 07:49:22 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2025-06-04 07:49:22 +0000 [MT] Skipping step: IDEDistributionZipODRItemStep because it said so
+2025-06-04 07:49:22 +0000 [MT] Processing step: IDEDistributionCreateIPAStep
+2025-06-04 07:49:22 +0000 [MT] Running /usr/bin/ditto '-V' '-c' '-k' '--norsrc' '/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root' '/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Packages/CarControl.ipa'
+2025-06-04 07:49:22 +0000  >>> Copying /var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root 
+2025-06-04 07:49:22 +0000  copying file ./Payload/CarControl.app/_CodeSignature/CodeResources ... 
+2025-06-04 07:49:22 +0000  3349 bytes for ./Payload/CarControl.app/_CodeSignature/CodeResources
+2025-06-04 07:49:22 +0000  copying file ./Payload/CarControl.app/CarControl ... 
+2025-06-04 07:49:22 +0000  190336 bytes for ./Payload/CarControl.app/CarControl
+2025-06-04 07:49:22 +0000  copying file ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/_CodeSignature/CodeResources ... 
+2025-06-04 07:49:22 +0000  2040 bytes for ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/_CodeSignature/CodeResources
+2025-06-04 07:49:22 +0000  copying file ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension ... 
+2025-06-04 07:49:22 +0000  95232 bytes for ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/CarControlWidgetExtension
+copying file ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/embedded.mobileprovision ... 
+2025-06-04 07:49:22 +0000  16397 bytes for ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/embedded.mobileprovision
+copying file ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/Info.plist ... 
+2025-06-04 07:49:22 +0000  920 bytes for ./Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex/Info.plist
+copying file ./Payload/CarControl.app/embedded.mobileprovision ... 
+2025-06-04 07:49:22 +0000  16278 bytes for ./Payload/CarControl.app/embedded.mobileprovision
+copying file ./Payload/CarControl.app/Info.plist ... 
+2025-06-04 07:49:22 +0000  1567 bytes for ./Payload/CarControl.app/Info.plist
+copying file ./Payload/CarControl.app/PkgInfo ... 
+2025-06-04 07:49:22 +0000  8 bytes for ./Payload/CarControl.app/PkgInfo
+2025-06-04 07:49:22 +0000 [MT] /usr/bin/ditto exited with 0
+2025-06-04 07:49:22 +0000 [MT] Processing step: IDEDistributionAppStoreInformationStep
+2025-06-04 07:49:22 +0000 [MT] Skipping step: IDEDistributionAppStoreInformationStep because it said so
+2025-06-04 07:49:22 +0000 [MT] Processing step: IDEDistributionGenerateProcessedDistributionItems
+2025-06-04 07:49:22 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002d632c0:'/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app/PlugIns/CarControlWidgetExtension.appex'>
+2025-06-04 07:49:22 +0000 [MT] IDEDistributionItem init <DVTFilePath:0x600002244a20:'/var/folders/s0/qgk03mmd0qs60rkv79wbp8t40000gn/T/XcodeDistPipeline.~~~z3ju8D/Root/Payload/CarControl.app'>
+2025-06-04 07:49:22 +0000 [MT] Processing step: IDEDistributionCreateManifestStep

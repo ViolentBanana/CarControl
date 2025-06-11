@@ -6,14 +6,76 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		74C33EB22DEF22690096FE00 /* WidgetKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C33E772DEF216E0096FE00 /* WidgetKit.framework */; };
+		74C33EB32DEF22690096FE00 /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 74C33E792DEF216E0096FE00 /* SwiftUI.framework */; };
+		74C33EBE2DEF226B0096FE00 /* CarControlWidgetExtension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 74C33EB12DEF22690096FE00 /* CarControlWidgetExtension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		74C33EBC2DEF226B0096FE00 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 749244A72DEE93EC00F90736 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 74C33EB02DEF22690096FE00;
+			remoteInfo = CarControlWidgetExtension;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		74C33E8C2DEF21710096FE00 /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				74C33EBE2DEF226B0096FE00 /* CarControlWidgetExtension.appex in Embed Foundation Extensions */,
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		749244AF2DEE93EC00F90736 /* CarControl.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CarControl.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C33E772DEF216E0096FE00 /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		74C33E792DEF216E0096FE00 /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		74C33EB12DEF22690096FE00 /* CarControlWidgetExtension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = CarControlWidgetExtension.appex; sourceTree = BUILT_PRODUCTS_DIR; };
+		74C33EC82DF0305C0096FE00 /* ExportOptions.plist */ = {isa = PBXFileReference; explicitFileType = text.plist.info; path = ExportOptions.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		749244C12DEE95F400F90736 /* Exceptions for "CarControl" folder in "CarControl" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 749244AE2DEE93EC00F90736 /* CarControl */;
+		};
+		74C33EC22DEF226B0096FE00 /* Exceptions for "CarControlWidget" folder in "CarControlWidgetExtension" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 74C33EB02DEF22690096FE00 /* CarControlWidgetExtension */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		749244B12DEE93EC00F90736 /* CarControl */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				749244C12DEE95F400F90736 /* Exceptions for "CarControl" folder in "CarControl" target */,
+			);
 			path = CarControl;
+			sourceTree = "<group>";
+		};
+		74C33EB42DEF22690096FE00 /* CarControlWidget */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				74C33EC22DEF226B0096FE00 /* Exceptions for "CarControlWidget" folder in "CarControlWidgetExtension" target */,
+			);
+			path = CarControlWidget;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -26,13 +88,25 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74C33EAE2DEF22690096FE00 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				74C33EB32DEF22690096FE00 /* SwiftUI.framework in Frameworks */,
+				74C33EB22DEF22690096FE00 /* WidgetKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		749244A62DEE93EC00F90736 = {
 			isa = PBXGroup;
 			children = (
+				74C33EC82DF0305C0096FE00 /* ExportOptions.plist */,
 				749244B12DEE93EC00F90736 /* CarControl */,
+				74C33EB42DEF22690096FE00 /* CarControlWidget */,
+				74C33E762DEF216E0096FE00 /* Frameworks */,
 				749244B02DEE93EC00F90736 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -41,8 +115,18 @@
 			isa = PBXGroup;
 			children = (
 				749244AF2DEE93EC00F90736 /* CarControl.app */,
+				74C33EB12DEF22690096FE00 /* CarControlWidgetExtension.appex */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		74C33E762DEF216E0096FE00 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				74C33E772DEF216E0096FE00 /* WidgetKit.framework */,
+				74C33E792DEF216E0096FE00 /* SwiftUI.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -55,10 +139,12 @@
 				749244AB2DEE93EC00F90736 /* Sources */,
 				749244AC2DEE93EC00F90736 /* Frameworks */,
 				749244AD2DEE93EC00F90736 /* Resources */,
+				74C33E8C2DEF21710096FE00 /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				74C33EBD2DEF226B0096FE00 /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
 				749244B12DEE93EC00F90736 /* CarControl */,
@@ -69,6 +155,28 @@
 			productName = CarControl;
 			productReference = 749244AF2DEE93EC00F90736 /* CarControl.app */;
 			productType = "com.apple.product-type.application";
+		};
+		74C33EB02DEF22690096FE00 /* CarControlWidgetExtension */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 74C33EBF2DEF226B0096FE00 /* Build configuration list for PBXNativeTarget "CarControlWidgetExtension" */;
+			buildPhases = (
+				74C33EAD2DEF22690096FE00 /* Sources */,
+				74C33EAE2DEF22690096FE00 /* Frameworks */,
+				74C33EAF2DEF22690096FE00 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				74C33EB42DEF22690096FE00 /* CarControlWidget */,
+			);
+			name = CarControlWidgetExtension;
+			packageProductDependencies = (
+			);
+			productName = CarControlWidgetExtension;
+			productReference = 74C33EB12DEF22690096FE00 /* CarControlWidgetExtension.appex */;
+			productType = "com.apple.product-type.app-extension";
 		};
 /* End PBXNativeTarget section */
 
@@ -81,6 +189,9 @@
 				LastUpgradeCheck = 1630;
 				TargetAttributes = {
 					749244AE2DEE93EC00F90736 = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					74C33EB02DEF22690096FE00 = {
 						CreatedOnToolsVersion = 16.3;
 					};
 				};
@@ -100,12 +211,20 @@
 			projectRoot = "";
 			targets = (
 				749244AE2DEE93EC00F90736 /* CarControl */,
+				74C33EB02DEF22690096FE00 /* CarControlWidgetExtension */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
 		749244AD2DEE93EC00F90736 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		74C33EAF2DEF22690096FE00 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -122,7 +241,22 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		74C33EAD2DEF22690096FE00 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		74C33EBD2DEF226B0096FE00 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 74C33EB02DEF22690096FE00 /* CarControlWidgetExtension */;
+			targetProxy = 74C33EBC2DEF226B0096FE00 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		749244B82DEE93EF00F90736 /* Debug */ = {
@@ -251,13 +385,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6WW22878N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarControl/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -278,13 +415,16 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6WW22878N;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarControl/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -292,6 +432,62 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.chen.CarControl;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		74C33EC02DEF226B0096FE00 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6WW22878N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarControlWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CarControlWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chen.CarControl.CarControlWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		74C33EC12DEF226B0096FE00 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				ASSETCATALOG_COMPILER_WIDGET_BACKGROUND_COLOR_NAME = WidgetBackground;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = M6WW22878N;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = CarControlWidget/Info.plist;
+				INFOPLIST_KEY_CFBundleDisplayName = CarControlWidget;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@executable_path/../../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.chen.CarControl.CarControlWidget;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -315,6 +511,15 @@
 			buildConfigurations = (
 				749244BB2DEE93EF00F90736 /* Debug */,
 				749244BC2DEE93EF00F90736 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		74C33EBF2DEF226B0096FE00 /* Build configuration list for PBXNativeTarget "CarControlWidgetExtension" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				74C33EC02DEF226B0096FE00 /* Debug */,
+				74C33EC12DEF226B0096FE00 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

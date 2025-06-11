@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CarControl.ipa</key>
+	<array>
+		<dict>
+			<key>architectures</key>
+			<array>
+				<string>arm64</string>
+			</array>
+			<key>buildNumber</key>
+			<string>1</string>
+			<key>certificate</key>
+			<dict>
+				<key>SHA1</key>
+				<string>E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7</string>
+				<key>dateExpires</key>
+				<string>2026/6/3</string>
+				<key>type</key>
+				<string>Apple Development</string>
+			</dict>
+			<key>embeddedBinaries</key>
+			<array>
+				<dict>
+					<key>architectures</key>
+					<array>
+						<string>arm64</string>
+					</array>
+					<key>buildNumber</key>
+					<string>1</string>
+					<key>certificate</key>
+					<dict>
+						<key>SHA1</key>
+						<string>E4B50383D6BCCDCD6EF2CA5945C4795D0FEABDE7</string>
+						<key>dateExpires</key>
+						<string>2026/6/3</string>
+						<key>type</key>
+						<string>Apple Development</string>
+					</dict>
+					<key>entitlements</key>
+					<dict>
+						<key>application-identifier</key>
+						<string>M6WW22878N.com.chen.CarControl.CarControlWidget</string>
+						<key>com.apple.developer.team-identifier</key>
+						<string>M6WW22878N</string>
+						<key>get-task-allow</key>
+						<true/>
+					</dict>
+					<key>name</key>
+					<string>CarControlWidgetExtension.appex</string>
+					<key>profile</key>
+					<dict>
+						<key>UUID</key>
+						<string>1f535383-7e58-4eac-82b2-bda7a7442691</string>
+						<key>dateExpires</key>
+						<string>2025/6/10</string>
+						<key>name</key>
+						<string>iOS Team Provisioning Profile: com.chen.CarControl.CarControlWidget</string>
+					</dict>
+					<key>team</key>
+					<dict>
+						<key>id</key>
+						<string>M6WW22878N</string>
+						<key>name</key>
+						<string>方旭 陈</string>
+					</dict>
+					<key>versionNumber</key>
+					<string>1.0</string>
+				</dict>
+			</array>
+			<key>entitlements</key>
+			<dict>
+				<key>application-identifier</key>
+				<string>M6WW22878N.com.chen.CarControl</string>
+				<key>com.apple.developer.team-identifier</key>
+				<string>M6WW22878N</string>
+				<key>get-task-allow</key>
+				<true/>
+			</dict>
+			<key>name</key>
+			<string>CarControl.app</string>
+			<key>profile</key>
+			<dict>
+				<key>UUID</key>
+				<string>a1e23550-b6c1-4509-9d74-f7af23d66170</string>
+				<key>dateExpires</key>
+				<string>2025/6/10</string>
+				<key>name</key>
+				<string>iOS Team Provisioning Profile: com.chen.CarControl</string>
+			</dict>
+			<key>team</key>
+			<dict>
+				<key>id</key>
+				<string>M6WW22878N</string>
+				<key>name</key>
+				<string>方旭 陈</string>
+			</dict>
+			<key>versionNumber</key>
+			<string>1.0</string>
+		</dict>
+	</array>
+</dict>
+</plist>
