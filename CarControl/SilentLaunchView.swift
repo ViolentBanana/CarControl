@@ -9,35 +9,27 @@ import SwiftUI
 
 struct SilentLaunchView: View {
     @EnvironmentObject var bluetoothVM: BluetoothViewModel
-    let command: String
+    let command: VehicleCommand
+    let onSent: () -> Void
 
     @State private var isSent = false
-    @State private var pendingVehicleCommand: VehicleCommand?
-    @Environment(\.scenePhase) var scenePhase
 
     var body: some View {
         Color.clear
             .onAppear {
-                pendingVehicleCommand = VehicleCommand(rawValue: command)
                 bluetoothVM.connectToVehicle()
                 sendWhenReady()
-                AppDelegate.pendingCommand = nil
             }
             .onChange(of: bluetoothVM.controlState) { _ in
                 sendWhenReady()
-            }
-            .onChange(of: scenePhase) { phase in
-                if phase == .background && isSent {
-                    exit(0)  // ✅ 完成后关闭 App（可选）
-                }
             }
     }
 
     private func sendWhenReady() {
         guard !isSent,
-              bluetoothVM.controlState.isReady,
-              let pendingVehicleCommand else { return }
-        bluetoothVM.send(pendingVehicleCommand)
+              bluetoothVM.controlState.isReady else { return }
         isSent = true
+        bluetoothVM.send(command)
+        onSent()
     }
 }

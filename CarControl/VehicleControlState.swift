@@ -20,6 +20,16 @@ enum VehicleCommand: String, CaseIterable, Equatable {
         case .lock: "lock.fill"
         }
     }
+
+    init?(url: URL) {
+        guard url.scheme?.lowercased() == "carcontrol",
+              url.host?.lowercased() == "send",
+              let rawValue = URLComponents(url: url, resolvingAgainstBaseURL: false)?
+                .queryItems?
+                .first(where: { $0.name == "cmd" })?
+                .value else { return nil }
+        self.init(rawValue: rawValue)
+    }
 }
 
 enum VehicleControlState: Equatable {

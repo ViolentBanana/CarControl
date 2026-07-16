@@ -48,10 +48,6 @@ struct ContentView: View {
         .onAppear {
             bluetoothVM.connectToVehicle()
         }
-        .onReceive(NotificationCenter.default.publisher(for: .bluetoothCommand)) { notification in
-            guard let rawCommand = notification.object as? String else { return }
-            bluetoothVM.sendCommand(rawCommand)
-        }
         .onChange(of: bluetoothVM.lastCommandResult) { result in
             guard let result else { return }
 
