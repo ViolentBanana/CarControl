@@ -117,6 +117,7 @@ struct ContentView: View {
                 .background(VehicleControlTheme.elevated)
                 .clipShape(Capsule())
         }
+        .frame(minHeight: 44)
         .accessibilityElement(children: .combine)
         .contentShape(Rectangle())
         .gesture(backgroundTapGesture)
@@ -151,6 +152,7 @@ struct ContentView: View {
                 .foregroundStyle(VehicleControlTheme.secondaryText)
                 .frame(maxWidth: .infinity, alignment: .leading)
         }
+        .frame(minHeight: 44)
         .contentShape(Rectangle())
         .gesture(backgroundTapGesture)
     }
@@ -184,6 +186,7 @@ struct ContentView: View {
             .foregroundStyle(presentation.isFailure ? VehicleControlTheme.accent : VehicleControlTheme.ready)
             .padding(.horizontal, 14)
             .padding(.vertical, 10)
+            .frame(minHeight: 44)
             .background(VehicleControlTheme.elevated)
             .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
             .transition(reduceMotion ? .opacity : .move(edge: .top).combined(with: .opacity))
