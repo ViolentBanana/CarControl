@@ -23,10 +23,10 @@ struct SilentLaunchView: View {
                 sendWhenReady()
                 AppDelegate.pendingCommand = nil
             }
-            .onChange(of: bluetoothVM.controlState) { _, _ in
+            .onChange(of: bluetoothVM.controlState) { _ in
                 sendWhenReady()
             }
-            .onChange(of: scenePhase) { _, phase in
+            .onChange(of: scenePhase) { phase in
                 if phase == .background && isSent {
                     exit(0)  // ✅ 完成后关闭 App（可选）
                 }
