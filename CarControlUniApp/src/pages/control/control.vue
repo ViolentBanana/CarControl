@@ -7,7 +7,7 @@ import VehicleControlButton from '../../components/VehicleControlButton.vue'
 import VehicleHero from '../../components/VehicleHero.vue'
 import { createVehicleController } from '../../composables/useVehicleController.js'
 import { VehicleCommand, commandFromValue } from '../../domain/vehicle-command.js'
-import { connectionPresentation, createControlState, statusText } from '../../domain/vehicle-control-state.js'
+import { createControlState, statusText } from '../../domain/vehicle-control-state.js'
 import { createBluetoothService } from '../../services/bluetooth-service.js'
 
 const unsupportedState = ref(createControlState('unavailable', {
@@ -25,7 +25,8 @@ const controlState = computed(() => controller?.state.value ?? unsupportedState.
 const logs = computed(() => controller?.logs.value ?? [])
 const lastResult = computed(() => controller?.lastResult.value ?? null)
 const ready = computed(() => controlState.value.phase === 'ready')
-const connection = computed(() => connectionPresentation(controlState.value.phase))
+const connected = computed(() => ['ready', 'sending'].includes(controlState.value.phase))
+const pulse = computed(() => ['scanning', 'connecting'].includes(controlState.value.phase))
 const disconnected = computed(() => ['disconnected', 'unavailable'].includes(controlState.value.phase))
 const status = computed(() => controlState.value.message ?? statusText(controlState.value))
 const showRetry = computed(() => ['disconnected', 'failure'].includes(controlState.value.phase))
@@ -84,8 +85,9 @@ onUnload(() => controller?.dispose())
     <view class="content">
       <ConnectionHeader
         :status="status"
-        :connected="connection.connected"
-        :pulse="connection.pulse"
+        :ready="ready"
+        :connected="connected"
+        :pulse="pulse"
         :show-retry="showRetry"
         @retry="retry"
         @open-logs="showLogs = true"
@@ -97,7 +99,7 @@ onUnload(() => controller?.dispose())
       </view>
 
       <VehicleHero
-        :ready="connection.connected"
+        :ready="connected"
         :disconnected="disconnected"
         :trunk-open="trunkOpen"
       />
@@ -105,15 +107,15 @@ onUnload(() => controller?.dispose())
       <view class="remote-zone">
         <text
           class="connection-hint"
-          :class="{ 'is-hidden': connection.connected }"
-          :aria-hidden="connection.connected"
+          :class="{ 'is-hidden': connected }"
+          :aria-hidden="connected"
         >连接 RM3 后可操作</text>
-        <view class="remote-console" :class="{ 'is-disabled': !connection.connected }">
+        <view class="remote-console" :class="{ 'is-disabled': !connected }">
           <VehicleControlButton
             class="side-control side-control--left"
             secondary
             :command="VehicleCommand.unlock"
-            :connected="connection.connected"
+            :connected="connected"
             :enabled="ready"
             :busy="isBusy('unlock')"
             @command="sendCommand"
@@ -122,7 +124,7 @@ onUnload(() => controller?.dispose())
             <VehicleControlButton
               primary
               :command="VehicleCommand.lock"
-              :connected="connection.connected"
+              :connected="connected"
               :enabled="ready"
               :busy="isBusy('lock')"
               @command="sendCommand"
@@ -132,7 +134,7 @@ onUnload(() => controller?.dispose())
             class="side-control side-control--right"
             secondary
             :command="VehicleCommand.trunk"
-            :connected="connection.connected"
+            :connected="connected"
             :enabled="ready"
             :busy="isBusy('trunk')"
             @command="sendCommand"

@@ -1,6 +1,7 @@
 <script setup>
 defineProps({
   status: { type: String, required: true },
+  ready: { type: Boolean, default: false },
   connected: { type: Boolean, default: false },
   pulse: { type: Boolean, default: false },
   showRetry: { type: Boolean, default: false },
@@ -26,7 +27,7 @@ defineEmits(['retry', 'openLogs'])
       <view class="status-copy">
         <view
           class="status-dot"
-          :class="{ 'status-dot--connected': connected, 'status-dot--pulse': pulse }"
+          :class="{ 'status-dot--connected': ready || connected, 'status-dot--pulse': pulse }"
         />
         <text class="status">{{ status }}</text>
       </view>

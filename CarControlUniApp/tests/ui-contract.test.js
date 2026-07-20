@@ -7,6 +7,25 @@ const source = (relativePath) => readFileSync(
   'utf8',
 )
 
+function declarations(relativePath, selector) {
+  const css = source(relativePath).match(/<style[^>]*>([\s\S]*?)<\/style>/)?.[1] ?? ''
+  const result = {}
+
+  for (const match of css.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
+    if (!match[1].split(',').map((part) => part.trim()).includes(selector)) continue
+    for (const entry of match[2].split(';')) {
+      const [property, value] = entry.split(':', 2).map((part) => part.trim())
+      if (property && value && !(property in result)) result[property] = value
+    }
+  }
+
+  return result
+}
+
+function pixelValues(value = '') {
+  return [...value.matchAll(/(-?\d+(?:\.\d+)?)px/g)].map((match) => Number(match[1]))
+}
+
 describe('vehicle control interface', () => {
   it('uses the compact red-black remote composition', () => {
     const page = source('pages/control/control.vue')
@@ -19,26 +38,59 @@ describe('vehicle control interface', () => {
   })
 
   it('keeps the remote in responsive normal flow without a tall-screen jump', () => {
-    const page = source('pages/control/control.vue')
-    const hero = source('components/VehicleHero.vue')
+    const pageLayout = declarations('pages/control/control.vue', '.control-page')
+    const contentLayout = declarations('pages/control/control.vue', '.content')
+    const remoteLayout = declarations('pages/control/control.vue', '.remote-zone')
+    const heroLayout = declarations('components/VehicleHero.vue', '.vehicle-hero')
 
-    expect(page).toMatch(/\.control-page\s*\{[^}]*min-height:\s*100vh;/s)
-    expect(page).toMatch(/\.content\s*\{[^}]*min-height:\s*100vh;/s)
-    expect(page).not.toMatch(/\.content\s*\{[^}]*overflow:\s*hidden;/s)
-    expect(hero).toMatch(/\.vehicle-hero\s*\{[^}]*align-items:\s*flex-end;[^}]*flex:\s*1 1 0;[^}]*min-height:\s*0;/s)
-    expect(page).not.toMatch(/@media \(min-height:\s*800px\)/)
-    expect(page).not.toMatch(/\.remote-zone\s*\{[^}]*transform:\s*translateY/s)
+    expect(pageLayout['min-height']).toBe('100vh')
+    expect(pageLayout.height).toBeUndefined()
+    expect(contentLayout['min-height']).toBe('100vh')
+    expect(contentLayout.height).toBeUndefined()
+    expect(contentLayout.overflow).not.toBe('hidden')
+    expect(remoteLayout.position ?? '').not.toMatch(/absolute|fixed/)
+    expect(remoteLayout.transform).toBeUndefined()
+    expect(heroLayout.flex).toBe('1 1 0')
+    expect(heroLayout['min-height']).toBe('0')
+  })
+
+  it('keeps the fixed UI inside an 812px viewport budget', () => {
+    const content = declarations('pages/control/control.vue', '.content')
+    const remote = declarations('pages/control/control.vue', '.remote-zone')
+    const hint = declarations('pages/control/control.vue', '.connection-hint')
+    const consoleLayout = declarations('pages/control/control.vue', '.remote-console')
+    const banner = declarations('pages/control/control.vue', '.result-banner')
+    const titleRow = declarations('components/ConnectionHeader.vue', '.title-row')
+    const statusRow = declarations('components/ConnectionHeader.vue', '.status-row')
+    const [contentTop, , contentBottom] = pixelValues(content.padding)
+    const fixedBudget = contentTop
+      + 47 // conservative native status bar
+      + contentBottom
+      + 34 // conservative bottom safe area
+      + pixelValues(titleRow['min-height'])[0]
+      + pixelValues(statusRow['min-height'])[0]
+      + Math.max(...pixelValues(remote['margin-top']))
+      + pixelValues(hint['min-height'])[0]
+      + pixelValues(consoleLayout.height)[0]
+      + pixelValues(banner['margin-top'])[0]
+      + pixelValues(banner['min-height'])[0]
+
+    expect(fixedBudget).toBeLessThan(812)
+    expect(812 - fixedBudget).toBeGreaterThan(240)
   })
 
   it('separates connected appearance from command availability while sending', () => {
     const page = source('pages/control/control.vue')
     const button = source('components/VehicleControlButton.vue')
+    const domain = source('domain/vehicle-control-state.js')
 
-    expect(page).toContain('connectionPresentation(controlState.value.phase)')
-    expect(page).toContain(':connected="connection.connected"')
+    expect(domain).not.toContain('canActivateControl')
+    expect(domain).not.toContain('connectionPresentation')
+    expect(page).not.toContain('connectionPresentation')
+    expect(page).toContain(':connected="connected"')
     expect(page).toContain(':enabled="ready"')
-    expect(page).toContain("'is-hidden': connection.connected")
-    expect(button).toContain('canActivateControl')
+    expect(page).toContain("'is-hidden': connected")
+    expect(button).not.toContain("../domain/vehicle-control-state.js")
     expect(button).toContain(':disabled="!canActivate"')
     expect(button).toContain("'control-button--connected': connected")
   })
@@ -47,7 +99,9 @@ describe('vehicle control interface', () => {
     const page = source('pages/control/control.vue')
     const header = source('components/ConnectionHeader.vue')
 
-    expect(page).toContain(':pulse="connection.pulse"')
+    expect(page).toContain(':ready="ready"')
+    expect(page).toContain(':pulse="pulse"')
+    expect(header).toContain("ready: { type: Boolean, default: false }")
     expect(header).toContain("pulse: { type: Boolean, default: false }")
     expect(header).toContain("'status-dot--pulse': pulse")
   })

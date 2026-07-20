@@ -1,6 +1,5 @@
 <script setup>
 import { computed } from 'vue'
-import { canActivateControl } from '../domain/vehicle-control-state.js'
 
 const props = defineProps({
   command: { type: Object, required: true },
@@ -12,10 +11,7 @@ const props = defineProps({
 })
 
 const emit = defineEmits(['command'])
-const canActivate = computed(() => canActivateControl({
-  enabled: props.enabled,
-  busy: props.busy,
-}))
+const canActivate = computed(() => props.enabled && !props.busy)
 
 function activate() {
   if (canActivate.value) emit('command', props.command.key)
@@ -25,7 +21,7 @@ function activate() {
 <template>
   <button
     class="control-button"
-    :class="{ primary, secondary, busy, 'control-button--connected': connected, 'control-button--secondary': secondary }"
+    :class="{ primary, secondary, busy, 'control-button--connected': connected, 'control-button--locked': connected && !enabled, 'control-button--secondary': secondary }"
     :disabled="!canActivate"
     :aria-label="command.title"
     @click="activate"
@@ -42,6 +38,7 @@ function activate() {
 .control-button.primary.control-button--connected { color: #fff; background: #ed2926; box-shadow: 0 16px 36px rgba(237,41,38,.34), inset 0 1px 0 rgba(255,255,255,.2), inset 0 -10px 18px rgba(83,0,0,.14); }
 .control-button--secondary { width: 60px; height: 60px; background: #20242a; }
 .control-button--connected { color: #fff; }
+.control-button--locked:not(.busy) { opacity: .62; filter: saturate(.72); }
 .control-button.busy { color: #fff; filter: brightness(.9); }
 .control-button:active { transform: scale(.96); filter: brightness(.9); }
 .control-button:not(.control-button--connected)[disabled] { background-color: #20242a !important; }
