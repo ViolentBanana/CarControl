@@ -34,6 +34,7 @@ playground.xcworkspace
 
 .build/
 .worktrees/
+.superpowers/sdd/
 
 # CocoaPods
 #

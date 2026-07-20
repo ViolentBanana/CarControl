@@ -1,6 +1,6 @@
 // @vitest-environment jsdom
 
-import { createApp, h, nextTick, reactive } from '@vue/runtime-dom'
+import { createApp, h, nextTick, reactive } from 'vue'
 import { afterEach, describe, expect, it } from 'vitest'
 import VehicleControlButton from '../src/components/VehicleControlButton.vue'
 
