@@ -138,7 +138,7 @@ onUnload(() => controller?.dispose())
   color: var(--ink);
   background: var(--bg);
 }
-.content { display: flex; flex-direction: column; box-sizing: border-box; min-height: 100vh; padding: calc(12px + env(safe-area-inset-top)) 20px calc(24px + env(safe-area-inset-bottom)); }
+.content { display: flex; flex-direction: column; box-sizing: border-box; min-height: 100vh; padding: calc(12px + var(--status-bar-height)) 20px calc(24px + env(safe-area-inset-bottom)); }
 .result-banner { display: flex; align-items: center; gap: 8px; box-sizing: border-box; min-height: 44px; margin-top: 12px; padding: 10px 14px; color: var(--ready); background: var(--surface); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; font-size: 14px; font-weight: 650; }
 .result-banner.failure { color: var(--accent); }
 .result-icon { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; }

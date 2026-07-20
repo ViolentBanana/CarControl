@@ -39,4 +39,8 @@ describe('vehicle control interface', () => {
   it('states that H5 cannot control Bluetooth', () => {
     expect(source('pages/control/control.vue')).toContain('当前平台不支持蓝牙控制')
   })
+
+  it('reserves the native status bar above the custom header', () => {
+    expect(source('pages/control/control.vue')).toContain('var(--status-bar-height)')
+  })
 })
