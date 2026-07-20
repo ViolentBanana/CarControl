@@ -96,26 +96,35 @@ onUnload(() => controller?.dispose())
 
       <VehicleHero :ready="ready" :disconnected="disconnected" :trunk-open="trunkOpen" />
 
-      <view class="control-dock">
-        <VehicleControlButton
-          :command="VehicleCommand.unlock"
-          :enabled="ready"
-          :busy="isBusy('unlock')"
-          @command="sendCommand"
-        />
-        <VehicleControlButton
-          primary
-          :command="VehicleCommand.lock"
-          :enabled="ready"
-          :busy="isBusy('lock')"
-          @command="sendCommand"
-        />
-        <VehicleControlButton
-          :command="VehicleCommand.trunk"
-          :enabled="ready"
-          :busy="isBusy('trunk')"
-          @command="sendCommand"
-        />
+      <view class="remote-zone">
+        <text v-if="!ready" class="connection-hint">连接 RM3 后可操作</text>
+        <view class="remote-console" :class="{ 'is-disabled': !ready }">
+          <VehicleControlButton
+            class="side-control side-control--left"
+            secondary
+            :command="VehicleCommand.unlock"
+            :enabled="ready"
+            :busy="isBusy('unlock')"
+            @command="sendCommand"
+          />
+          <view class="primary-lock">
+            <VehicleControlButton
+              primary
+              :command="VehicleCommand.lock"
+              :enabled="ready"
+              :busy="isBusy('lock')"
+              @command="sendCommand"
+            />
+          </view>
+          <VehicleControlButton
+            class="side-control side-control--right"
+            secondary
+            :command="VehicleCommand.trunk"
+            :enabled="ready"
+            :busy="isBusy('trunk')"
+            @command="sendCommand"
+          />
+        </view>
       </view>
 
     </view>
@@ -138,17 +147,32 @@ onUnload(() => controller?.dispose())
   color: var(--ink);
   background: var(--bg);
 }
-.content { display: flex; flex-direction: column; box-sizing: border-box; min-height: 100vh; padding: calc(12px + var(--status-bar-height)) 20px calc(24px + env(safe-area-inset-bottom)); }
+.content { display: flex; flex-direction: column; box-sizing: border-box; width: 100%; max-width: 480px; min-height: 100vh; margin: 0 auto; padding: calc(10px + var(--status-bar-height)) 20px calc(18px + env(safe-area-inset-bottom)); }
 .result-banner { display: flex; align-items: center; gap: 8px; box-sizing: border-box; min-height: 44px; margin-top: 12px; padding: 10px 14px; color: var(--ready); background: var(--surface); border: 1px solid rgba(255,255,255,.05); border-radius: 12px; font-size: 14px; font-weight: 650; }
 .result-banner.failure { color: var(--accent); }
 .result-icon { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; }
-.control-dock { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; margin-top: auto; padding: 18px 0; }
+.remote-zone { display: flex; flex-direction: column; align-items: center; flex: 0 0 auto; min-height: 190px; margin-top: auto; padding-top: 4px; }
+.connection-hint { min-height: 20px; color: rgba(255,255,255,.54); font-size: 13px; line-height: 20px; }
+.remote-console { display: grid; grid-template-columns: 97px 106px 97px; align-items: center; justify-items: center; width: 300px; height: 154px; }
+.primary-lock { position: relative; display: flex; align-items: center; justify-content: center; box-sizing: border-box; width: 106px; height: 154px; overflow: hidden; background: #191c22; border: 1px solid rgba(255,255,255,.075); border-radius: 53px; box-shadow: 0 20px 44px rgba(0,0,0,.36), inset 0 1px 0 rgba(255,255,255,.06), inset 0 -16px 28px rgba(0,0,0,.24); }
+.primary-lock::before { content: ''; position: absolute; inset: 5px 5px auto; height: 70px; border-radius: 48px 48px 20px 20px; background: #252930; box-shadow: inset 0 1px 0 rgba(255,255,255,.07); }
+.primary-lock :deep(.control-button) { position: relative; z-index: 1; }
+.side-control--left { transform: translateX(7px); }
+.side-control--right { transform: translateX(-7px); }
+.side-control--left:active { transform: translateX(7px) scale(.96); }
+.side-control--right:active { transform: translateX(-7px) scale(.96); }
+@media (min-height: 800px) {
+  .remote-zone { transform: translateY(-112px); }
+}
 @media (max-width: 340px) {
   .content { padding-left: 16px; padding-right: 16px; }
-  .control-dock { flex-direction: column; gap: 18px; }
-  .control-dock :nth-child(1) { order: 2; }
-  .control-dock :nth-child(2) { order: 1; }
-  .control-dock :nth-child(3) { order: 3; }
+  .remote-console { transform: scale(.94); }
+}
+@media (max-height: 700px) {
+  .content { padding-top: calc(6px + var(--status-bar-height)); padding-bottom: calc(10px + env(safe-area-inset-bottom)); }
+  .result-banner { min-height: 40px; margin-top: 6px; padding-top: 8px; padding-bottom: 8px; }
+  .remote-zone { min-height: 174px; padding-top: 0; }
+  .remote-console { height: 150px; }
 }
 @media (prefers-reduced-motion: reduce) {
   * { transition: none !important; animation: none !important; }
