@@ -1,0 +1,17 @@
+{
+	"pages": [ //pages数组中第一项表示应用启动页，参考：https://uniapp.dcloud.io/collocation/pages
+		{
+			"path": "pages/control/control",
+			"style": {
+				"navigationStyle": "custom",
+				"backgroundColor": "#090b0e"
+			}
+		}
+	],
+	"globalStyle": {
+		"navigationBarTextStyle": "white",
+		"navigationBarTitleText": "CarControl",
+		"navigationBarBackgroundColor": "#090b0e",
+		"backgroundColor": "#090b0e"
+	}
+}

@@ -1,0 +1,64 @@
+{
+  "name": "CarControl",
+  "appid": "",
+  "description": "通过 RM3 蓝牙模块控制 Q60S 车辆",
+  "versionName": "1.0.0",
+  "versionCode": "100",
+  "transformPx": false,
+  "app-plus": {
+    "usingComponents": true,
+    "nvueStyleCompiler": "uni-app",
+    "compilerVersion": 3,
+    "safearea": {
+      "bottom": {
+        "offset": "none"
+      }
+    },
+    "splashscreen": {
+      "alwaysShowBeforeRender": true,
+      "waiting": true,
+      "autoclose": true,
+      "delay": 0
+    },
+    "modules": {
+      "Bluetooth": {}
+    },
+    "distribute": {
+      "android": {
+        "packagename": "com.chen.carcontrol",
+        "schemes": "carcontrol",
+        "minSdkVersion": 23,
+        "forceDarkAllowed": false,
+        "abiFilters": [
+          "arm64-v8a",
+          "armeabi-v7a"
+        ],
+        "permissions": [
+          "<uses-feature android:name=\"android.hardware.bluetooth_le\" android:required=\"true\"/>"
+        ]
+      },
+      "ios": {
+        "devices": "iphone",
+        "urltypes": "carcontrol",
+        "deploymentTarget": "12.0",
+        "privacyDescription": {
+          "NSBluetoothPeripheralUsageDescription": "用于连接 RM3 车辆控制模块并发送车辆控制指令。",
+          "NSBluetoothAlwaysUsageDescription": "用于连接 RM3 车辆控制模块并发送车辆控制指令。"
+        }
+      },
+      "sdkConfigs": {}
+    }
+  },
+  "quickapp": {},
+  "mp-weixin": {
+    "appid": "",
+    "setting": {
+      "urlCheck": false
+    },
+    "usingComponents": true
+  },
+  "uniStatistics": {
+    "enable": false
+  },
+  "vueVersion": "3"
+}
