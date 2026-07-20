@@ -162,7 +162,7 @@ onUnload(() => controller?.dispose())
 .side-control--left:active { transform: translateX(7px) scale(.96); }
 .side-control--right:active { transform: translateX(-7px) scale(.96); }
 @media (min-height: 800px) {
-  .remote-zone { transform: translateY(-112px); }
+  .remote-zone { min-height: 302px; }
 }
 @media (max-width: 340px) {
   .content { padding-left: 16px; padding-right: 16px; }

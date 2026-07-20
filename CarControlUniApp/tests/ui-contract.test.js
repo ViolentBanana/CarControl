@@ -18,6 +18,13 @@ describe('vehicle control interface', () => {
     expect(button).toContain('control-button--secondary')
   })
 
+  it('reserves tall-screen remote spacing in normal flow', () => {
+    const page = source('pages/control/control.vue')
+
+    expect(page).toMatch(/@media \(min-height: 800px\)\s*\{\s*\.remote-zone\s*\{\s*min-height: 302px;\s*\}/s)
+    expect(page).not.toMatch(/\.remote-zone\s*\{[^}]*transform:\s*translateY/s)
+  })
+
   it('keeps the approved visible control labels', () => {
     const page = source('pages/control/control.vue')
     const header = source('components/ConnectionHeader.vue')
