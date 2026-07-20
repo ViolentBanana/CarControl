@@ -18,11 +18,38 @@ describe('vehicle control interface', () => {
     expect(button).toContain('control-button--secondary')
   })
 
-  it('reserves tall-screen remote spacing in normal flow', () => {
+  it('keeps the remote in responsive normal flow without a tall-screen jump', () => {
     const page = source('pages/control/control.vue')
+    const hero = source('components/VehicleHero.vue')
 
-    expect(page).toMatch(/@media \(min-height: 800px\)\s*\{\s*\.remote-zone\s*\{\s*min-height: 302px;\s*\}/s)
+    expect(page).toMatch(/\.control-page\s*\{[^}]*min-height:\s*100vh;/s)
+    expect(page).toMatch(/\.content\s*\{[^}]*min-height:\s*100vh;/s)
+    expect(page).not.toMatch(/\.content\s*\{[^}]*overflow:\s*hidden;/s)
+    expect(hero).toMatch(/\.vehicle-hero\s*\{[^}]*align-items:\s*flex-end;[^}]*flex:\s*1 1 0;[^}]*min-height:\s*0;/s)
+    expect(page).not.toMatch(/@media \(min-height:\s*800px\)/)
     expect(page).not.toMatch(/\.remote-zone\s*\{[^}]*transform:\s*translateY/s)
+  })
+
+  it('separates connected appearance from command availability while sending', () => {
+    const page = source('pages/control/control.vue')
+    const button = source('components/VehicleControlButton.vue')
+
+    expect(page).toContain('connectionPresentation(controlState.value.phase)')
+    expect(page).toContain(':connected="connection.connected"')
+    expect(page).toContain(':enabled="ready"')
+    expect(page).toContain("'is-hidden': connection.connected")
+    expect(button).toContain('canActivateControl')
+    expect(button).toContain(':disabled="!canActivate"')
+    expect(button).toContain("'control-button--connected': connected")
+  })
+
+  it('maps the status pulse explicitly into the connection header', () => {
+    const page = source('pages/control/control.vue')
+    const header = source('components/ConnectionHeader.vue')
+
+    expect(page).toContain(':pulse="connection.pulse"')
+    expect(header).toContain("pulse: { type: Boolean, default: false }")
+    expect(header).toContain("'status-dot--pulse': pulse")
   })
 
   it('keeps the approved visible control labels', () => {

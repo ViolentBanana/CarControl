@@ -1,7 +1,8 @@
 <script setup>
 defineProps({
   status: { type: String, required: true },
-  ready: { type: Boolean, default: false },
+  connected: { type: Boolean, default: false },
+  pulse: { type: Boolean, default: false },
   showRetry: { type: Boolean, default: false },
 })
 
@@ -23,7 +24,10 @@ defineEmits(['retry', 'openLogs'])
 
     <view class="status-row">
       <view class="status-copy">
-        <view class="status-dot" :class="{ ready }" />
+        <view
+          class="status-dot"
+          :class="{ 'status-dot--connected': connected, 'status-dot--pulse': pulse }"
+        />
         <text class="status">{{ status }}</text>
       </view>
       <button v-if="showRetry" class="retry-button" @click="$emit('retry')">重新扫描</button>
@@ -42,8 +46,9 @@ defineEmits(['retry', 'openLogs'])
 .title { color: #fff; font-size: 20px; line-height: 24px; font-weight: 760; letter-spacing: -0.3px; }
 .badge { color: rgba(255,255,255,.72); background: #13161b; border: 1px solid rgba(255,255,255,.05); border-radius: 999px; padding: 4px 8px; font-size: 12px; font-weight: 650; }
 .status { overflow: hidden; color: rgba(255,255,255,.68); font-size: 13px; line-height: 20px; text-overflow: ellipsis; white-space: nowrap; }
-.status-dot { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: #ed2926; box-shadow: 0 0 10px rgba(237,41,38,.46); animation: status-pulse 1.8s ease-in-out infinite; }
-.status-dot.ready { background: #40d184; box-shadow: 0 0 12px rgba(64,209,132,.62); animation: none; }
+.status-dot { width: 7px; height: 7px; flex: 0 0 7px; border-radius: 50%; background: #ed2926; box-shadow: 0 0 10px rgba(237,41,38,.46); }
+.status-dot--connected { background: #40d184; box-shadow: 0 0 12px rgba(64,209,132,.62); }
+.status-dot--pulse { animation: status-pulse 1.8s ease-in-out infinite; }
 .log-button, .retry-button { display: flex; align-items: center; justify-content: center; box-sizing: border-box; margin: 0; color: #fff; background: #13161b; border: 1px solid rgba(255,255,255,.07); font-weight: 650; line-height: 1; transition: transform .16s ease, filter .16s ease; }
 .log-button { width: 48px; height: 48px; min-width: 48px; min-height: 48px; padding: 0; border-radius: 50%; }
 .log-glyph { margin-top: -5px; font-size: 24px; letter-spacing: 1px; line-height: 24px; }
@@ -58,7 +63,7 @@ defineEmits(['retry', 'openLogs'])
   .retry-button { min-width: 76px; padding: 0 9px; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .status-dot { animation: none; }
+  .status-dot--pulse { animation: none; }
   .log-button, .retry-button { transition: none; }
 }
 </style>
