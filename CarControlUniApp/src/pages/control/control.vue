@@ -118,9 +118,6 @@ onUnload(() => controller?.dispose())
         />
       </view>
 
-      <view class="command-caption">
-        <text>锁车</text><text>开锁</text><text>尾箱</text>
-      </view>
     </view>
 
     <DebugLogPanel :open="showLogs" :lines="logs" @close="showLogs = false" />
@@ -146,7 +143,6 @@ onUnload(() => controller?.dispose())
 .result-banner.failure { color: var(--accent); }
 .result-icon { display: flex; align-items: center; justify-content: center; width: 18px; height: 18px; border: 1px solid currentColor; border-radius: 50%; font-size: 12px; }
 .control-dock { display: flex; align-items: center; justify-content: center; gap: 24px; width: 100%; margin-top: auto; padding: 18px 0; }
-.command-caption { position: absolute; width: 1px; height: 1px; overflow: hidden; opacity: 0; }
 @media (max-width: 340px) {
   .content { padding-left: 16px; padding-right: 16px; }
   .control-dock { flex-direction: column; gap: 18px; }

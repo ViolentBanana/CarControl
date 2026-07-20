@@ -13,7 +13,8 @@ describe('vehicle control interface', () => {
     const header = source('components/ConnectionHeader.vue')
     const button = source('components/VehicleControlButton.vue')
     const log = source('components/DebugLogPanel.vue')
-    const combined = [page, header, button, log].join('\n')
+    const commands = source('domain/vehicle-command.js')
+    const combined = [page, header, button, log, commands].join('\n')
 
     for (const label of ['Q60S 控制', 'RM3', '锁车', '开锁', '尾箱', '日志', '重新扫描']) {
       expect(combined).toContain(label)

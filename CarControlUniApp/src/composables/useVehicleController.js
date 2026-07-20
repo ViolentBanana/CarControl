@@ -58,7 +58,10 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
 
     try {
       await service.connect(device.deviceId)
-      if (disposed || generation !== connectionGeneration) return
+      if (disposed || generation !== connectionGeneration) {
+        await service.disconnect(device.deviceId).catch(() => {})
+        return
+      }
 
       state.value = createControlState('discovering', { deviceName: device.name ?? device.localName ?? 'RM3' })
       const serviceResult = await service.getServices(device.deviceId)
@@ -128,6 +131,11 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
     lastResult.value = null
     state.value = createControlState('scanning')
     log('初始化蓝牙并搜索 RM3')
+
+    const previousDevice = currentDevice
+    currentDevice = null
+    if (previousDevice) await service.disconnect(previousDevice.deviceId).catch(() => {})
+    if (disposed || ownScanGeneration !== scanGeneration) return false
 
     try {
       await service.open()

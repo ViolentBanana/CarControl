@@ -154,6 +154,7 @@ describe('vehicle controller', () => {
 
     expect(controller.state.value.phase).toBe('scanning')
     expect(service.getServices).not.toHaveBeenCalled()
+    expect(service.disconnect).toHaveBeenCalledWith('OLD')
   })
 
   it('disables controls immediately after disconnect', async () => {
