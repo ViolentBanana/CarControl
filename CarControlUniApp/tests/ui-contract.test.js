@@ -8,6 +8,16 @@ const source = (relativePath) => readFileSync(
 )
 
 describe('vehicle control interface', () => {
+  it('uses the compact red-black remote composition', () => {
+    const page = source('pages/control/control.vue')
+    const button = source('components/VehicleControlButton.vue')
+
+    expect(page).toContain('remote-console')
+    expect(page).toContain('primary-lock')
+    expect(page).toContain('连接 RM3 后可操作')
+    expect(button).toContain('control-button--secondary')
+  })
+
   it('keeps the approved visible control labels', () => {
     const page = source('pages/control/control.vue')
     const header = source('components/ConnectionHeader.vue')
