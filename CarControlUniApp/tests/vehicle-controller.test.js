@@ -79,6 +79,22 @@ async function becomeReady(controller, service) {
 }
 
 describe('vehicle controller', () => {
+  it('restores an already-connected FFF0 device without filtering its name', async () => {
+    const service = createFakeService({
+      getConnected: vi.fn().mockResolvedValue({
+        devices: [{ deviceId: 'LOCK', name: 'RM0-LOCK' }],
+      }),
+    })
+    const controller = createVehicleController(service, createScheduler())
+
+    expect(await controller.connect()).toBe(true)
+    expect(service.connect).toHaveBeenCalledWith('LOCK')
+    expect(controller.state.value).toMatchObject({
+      phase: 'ready',
+      deviceName: 'RM0-LOCK',
+    })
+  })
+
   it('ignores non-RM3 devices', async () => {
     const service = createFakeService()
     const controller = createVehicleController(service, createScheduler())

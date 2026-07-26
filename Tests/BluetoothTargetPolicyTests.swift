@@ -10,6 +10,15 @@ enum BluetoothTargetPolicyTests {
         precondition(!BluetoothViewModel.isTargetDeviceName("Unknown Device"))
         precondition(!BluetoothViewModel.isTargetDeviceName(nil))
 
+        let connectedDeviceNames = ["RM0-LOCK", "RM3-BleKEY"]
+        precondition(
+            BluetoothViewModel.firstConnectedPeripheral(from: connectedDeviceNames)
+                == "RM0-LOCK"
+        )
+        precondition(
+            BluetoothViewModel.firstConnectedPeripheral(from: [String]()) == nil
+        )
+
         precondition(BluetoothViewModel.shouldHandleScanTimeout(
             scheduledGeneration: 2,
             currentGeneration: 2,

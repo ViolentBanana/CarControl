@@ -90,7 +90,7 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
         characteristicId: characteristic.uuid,
       }
       state.value = createControlState('ready', { deviceName: device.name ?? device.localName ?? 'RM3' })
-      log('RM3 控制通道已就绪')
+      log(`${state.value.deviceName} 控制通道已就绪`)
     } catch (error) {
       if (!disposed && generation === connectionGeneration) {
         fail(error?.errMsg ?? error?.message ?? '连接车辆失败')
@@ -143,7 +143,7 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
 
       const connected = await service.getConnected(['FFF0'])
       if (disposed || ownScanGeneration !== scanGeneration) return false
-      const knownDevice = (connected.devices ?? []).find(isTargetDevice)
+      const knownDevice = (connected.devices ?? [])[0]
       if (knownDevice) {
         await discover(knownDevice, ownConnectionGeneration)
         return state.value.phase === 'ready'

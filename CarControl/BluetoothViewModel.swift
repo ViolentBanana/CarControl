@@ -41,6 +41,10 @@ class BluetoothViewModel: NSObject, ObservableObject, CBCentralManagerDelegate, 
         return name.localizedCaseInsensitiveContains(targetNameFragment)
     }
 
+    static func firstConnectedPeripheral<Peripheral>(from peripherals: [Peripheral]) -> Peripheral? {
+        peripherals.first
+    }
+
     static func shouldHandleScanTimeout(
         scheduledGeneration: Int,
         currentGeneration: Int,
@@ -274,8 +278,8 @@ class BluetoothViewModel: NSObject, ObservableObject, CBCentralManagerDelegate, 
         }
 
         let connectedPeripherals = centralManager.retrieveConnectedPeripherals(withServices: [serviceUUID])
-        guard let peripheral = connectedPeripherals.first(where: { Self.isTargetDeviceName($0.name) }) else {
-            log("❌ 没有找到已连接的 \(Self.targetNameFragment)")
+        guard let peripheral = Self.firstConnectedPeripheral(from: connectedPeripherals) else {
+            log("❌ 没有找到已连接的 FFF0 设备")
             scanForDevices()
             return
         }
