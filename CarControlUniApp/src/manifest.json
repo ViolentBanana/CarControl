@@ -1,7 +1,7 @@
 {
   "name": "CarControl",
   "appid": "",
-  "description": "通过 RM3 蓝牙模块控制 Q60S 车辆",
+  "description": "通过车辆蓝牙模块控制 Q60S 车辆",
   "versionName": "1.0.0",
   "versionCode": "100",
   "transformPx": false,
@@ -42,8 +42,8 @@
         "urltypes": "carcontrol",
         "deploymentTarget": "12.0",
         "privacyDescription": {
-          "NSBluetoothPeripheralUsageDescription": "用于连接 RM3 车辆控制模块并发送车辆控制指令。",
-          "NSBluetoothAlwaysUsageDescription": "用于连接 RM3 车辆控制模块并发送车辆控制指令。"
+          "NSBluetoothPeripheralUsageDescription": "用于连接 RM0/RM3 车辆控制模块并发送车辆控制指令。",
+          "NSBluetoothAlwaysUsageDescription": "用于连接 RM0/RM3 车辆控制模块并发送车辆控制指令。"
         }
       },
       "sdkConfigs": {}

@@ -15,7 +15,7 @@ defineEmits(['retry', 'openLogs'])
     <view class="title-row">
       <view class="identity">
         <text class="title">Q60S 控制</text>
-        <text class="badge">RM3</text>
+        <text class="badge">BLE</text>
       </view>
       <button class="log-button" aria-label="日志" @click="$emit('openLogs')">
         <text class="log-glyph">···</text>

@@ -109,7 +109,7 @@ onUnload(() => controller?.dispose())
           class="connection-hint"
           :class="{ 'is-hidden': connected }"
           :aria-hidden="connected"
-        >连接 RM3 后可操作</text>
+        >建立车辆连接后可操作</text>
         <view class="remote-console" :class="{ 'is-disabled': !connected }">
           <VehicleControlButton
             class="side-control side-control--left"

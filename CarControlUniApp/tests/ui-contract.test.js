@@ -33,7 +33,7 @@ describe('vehicle control interface', () => {
 
     expect(page).toContain('remote-console')
     expect(page).toContain('primary-lock')
-    expect(page).toContain('连接 RM3 后可操作')
+    expect(page).toContain('建立车辆连接后可操作')
     expect(button).toContain('control-button--secondary')
   })
 
@@ -114,7 +114,7 @@ describe('vehicle control interface', () => {
     const commands = source('domain/vehicle-command.js')
     const combined = [page, header, button, log, commands].join('\n')
 
-    for (const label of ['Q60S 控制', 'RM3', '锁车', '开锁', '尾箱', '日志', '重新扫描']) {
+    for (const label of ['Q60S 控制', 'BLE', '锁车', '开锁', '尾箱', '日志', '重新扫描']) {
       expect(combined).toContain(label)
     }
   })

@@ -95,7 +95,98 @@ describe('vehicle controller', () => {
     })
   })
 
-  it('ignores non-RM3 devices', async () => {
+  it('starts scanning when the connected-device query does not return', async () => {
+    const pendingConnectedQuery = deferred()
+    const service = createFakeService({
+      getConnected: vi.fn(() => pendingConnectedQuery.promise),
+    })
+    const scheduler = createScheduler()
+    const controller = createVehicleController(service, scheduler)
+
+    const connecting = controller.connect()
+    await flush()
+    scheduler.run(scheduler.ids[0])
+
+    expect(await connecting).toBe(true)
+    expect(service.startScan).toHaveBeenCalledOnce()
+    expect(controller.state.value.phase).toBe('scanning')
+  })
+
+  it('connects a scanned RM0 device when it exposes the control service', async () => {
+    const service = createFakeService()
+    const controller = createVehicleController(service, createScheduler())
+
+    await controller.connect()
+    service.emitFound([{ deviceId: 'LOCK', name: 'RM0-LOCK' }])
+    await flush()
+    await flush()
+
+    expect(controller.state.value).toMatchObject({
+      phase: 'ready',
+      deviceName: 'RM0-LOCK',
+    })
+  })
+
+  it('keeps scanning after a candidate lacks FFF0 and connects the next valid device', async () => {
+    const service = createFakeService({
+      getServices: vi.fn()
+        .mockResolvedValueOnce({ services: [{ uuid: '1812' }] })
+        .mockResolvedValueOnce({
+          services: [{ uuid: '0000FFF0-0000-1000-8000-00805F9B34FB' }],
+        }),
+    })
+    const controller = createVehicleController(service, createScheduler())
+
+    await controller.connect()
+    service.emitFound([{ deviceId: 'LOCK', name: 'RM0-LOCK' }])
+    await flush()
+    await flush()
+    expect(controller.state.value.phase).toBe('scanning')
+
+    service.emitFound([{ deviceId: 'KEY', name: 'RM3-BleKEY' }])
+    await flush()
+    await flush()
+
+    expect(controller.state.value).toMatchObject({
+      phase: 'ready',
+      deviceName: 'RM3-BleKEY',
+    })
+  })
+
+  it('cancels and settles a pending connected-device query on dispose', async () => {
+    const pendingConnectedQuery = deferred()
+    const service = createFakeService({
+      getConnected: vi.fn(() => pendingConnectedQuery.promise),
+    })
+    const scheduler = createScheduler()
+    const controller = createVehicleController(service, scheduler)
+
+    const connecting = controller.connect()
+    await flush()
+    const queryTimer = scheduler.ids[0]
+    controller.dispose()
+
+    expect(scheduler.clearTimeout).toHaveBeenCalledWith(queryTimer)
+    expect(await connecting).toBe(false)
+  })
+
+  it('clears the connected-device timeout when the native query rejects', async () => {
+    const service = createFakeService({
+      getConnected: vi.fn().mockRejectedValue(new Error('系统查询失败')),
+    })
+    const scheduler = createScheduler()
+    const controller = createVehicleController(service, scheduler)
+
+    expect(await controller.connect()).toBe(false)
+    scheduler.runAll()
+
+    expect(scheduler.clearTimeout).toHaveBeenCalled()
+    expect(controller.logs.value.map(({ message }) => message)).not.toContain(
+      '查询已连接设备超时，继续扫描',
+    )
+  })
+
+  it('ignores unrelated devices', async () => {
     const service = createFakeService()
     const controller = createVehicleController(service, createScheduler())
 
@@ -107,7 +198,7 @@ describe('vehicle controller', () => {
     expect(service.connect).not.toHaveBeenCalled()
   })
 
-  it('becomes ready only after FFF0 exposes write or writeNoResponse', async () => {
+  it('keeps controls disabled and resumes scanning when FFF0 is not writable', async () => {
     const service = createFakeService({
       getCharacteristics: vi.fn().mockResolvedValue({
         characteristics: [{ uuid: 'C1', properties: { read: true } }],
@@ -120,7 +211,7 @@ describe('vehicle controller', () => {
     await flush()
     await flush()
 
-    expect(controller.state.value.phase).toBe('failure')
+    expect(controller.state.value.phase).toBe('scanning')
     expect(controller.isControllable.value).toBe(false)
   })
 

@@ -5,7 +5,8 @@ export function normalizeUuid(value = '') {
 }
 
 export function isTargetDevice(device) {
-  return (device?.name ?? device?.localName ?? '').toUpperCase().includes('RM3')
+  const name = (device?.name ?? device?.localName ?? '').toUpperCase()
+  return name.includes('RM0') || name.includes('RM3')
 }
 
 export function stringToArrayBuffer(value) {

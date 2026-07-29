@@ -10,7 +10,7 @@ export function statusText(state) {
   const labels = {
     unavailable: '蓝牙未开启',
     disconnected: '未连接目标车辆',
-    scanning: '正在搜索 RM3',
+    scanning: '正在建立车辆连接',
     connecting: '正在连接车辆',
     discovering: '正在初始化控制',
     ready: '车辆已连接',

@@ -16,7 +16,8 @@ describe('vehicle domain', () => {
     expect(isReady(createControlState('sending', { command: 'MSF' }))).toBe(false)
   })
 
-  it('matches RM3 case-insensitively and normalizes FFF0', () => {
+  it('matches RM0 and RM3 case-insensitively and normalizes FFF0', () => {
+    expect(isTargetDevice({ name: 'rm0-lock' })).toBe(true)
     expect(isTargetDevice({ name: 'rm3-car' })).toBe(true)
     expect(isTargetDevice({ name: 'speaker' })).toBe(false)
     expect(normalizeUuid('0000fff0-0000-1000-8000-00805f9b34fb')).toBe('FFF0')
