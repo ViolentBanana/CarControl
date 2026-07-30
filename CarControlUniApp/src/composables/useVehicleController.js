@@ -201,6 +201,7 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
     connectionGeneration += 1
     writeToken = null
     writableCharacteristic = null
+    currentDevice = null
     clearTimer('scan')
     clearTimer('result')
     state.value = createControlState('disconnected')

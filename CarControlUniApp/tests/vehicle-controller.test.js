@@ -299,6 +299,23 @@ describe('vehicle controller', () => {
     expect(controller.isControllable.value).toBe(false)
   })
 
+  it('retries immediately after a remote disconnect without closing the dead connection again', async () => {
+    const neverDisconnects = deferred()
+    const service = createFakeService({
+      disconnect: vi.fn(() => neverDisconnects.promise),
+    })
+    const controller = createVehicleController(service, createScheduler())
+    await becomeReady(controller, service)
+
+    service.emitConnection({ deviceId: 'D1', connected: false })
+    void controller.retry()
+    await flush()
+
+    expect(service.disconnect).not.toHaveBeenCalled()
+    expect(service.open).toHaveBeenCalledTimes(2)
+    expect(controller.state.value.phase).toBe('scanning')
+  })
+
   it('clears listeners and timers on dispose', async () => {
     const service = createFakeService()
     const scheduler = createScheduler()
