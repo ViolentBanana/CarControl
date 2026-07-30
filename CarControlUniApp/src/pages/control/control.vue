@@ -8,6 +8,7 @@ import VehicleHero from '../../components/VehicleHero.vue'
 import { createVehicleController } from '../../composables/useVehicleController.js'
 import { VehicleCommand, commandFromValue } from '../../domain/vehicle-command.js'
 import { createControlState, statusText } from '../../domain/vehicle-control-state.js'
+import { requestAndroidBluetoothPermissions } from '../../services/android-bluetooth-permissions.js'
 import { createBluetoothService } from '../../services/bluetooth-service.js'
 import { formatLogLines } from '../../utils/log-export.js'
 
@@ -16,13 +17,18 @@ const unsupportedState = ref(createControlState('unavailable', {
 }))
 const showLogs = ref(false)
 const pendingDeepLinkCommand = ref(null)
+const permissionMessage = ref('')
 let controller = null
 
 // #ifndef H5
 controller = createVehicleController(createBluetoothService(uni))
 // #endif
 
-const controlState = computed(() => controller?.state.value ?? unsupportedState.value)
+const controlState = computed(() => (
+  permissionMessage.value
+    ? createControlState('failure', { message: permissionMessage.value })
+    : controller?.state.value ?? unsupportedState.value
+))
 const logs = computed(() => controller?.logs.value ?? [])
 const lastResult = computed(() => controller?.lastResult.value ?? null)
 const ready = computed(() => controlState.value.phase === 'ready')
@@ -43,8 +49,44 @@ function isBusy(key) {
     && controlState.value.command === VehicleCommand[key].value
 }
 
+async function ensureBluetoothPermissions() {
+  // #ifdef APP-ANDROID
+  try {
+    const { osAndroidAPILevel } = uni.getSystemInfoSync()
+    const result = await requestAndroidBluetoothPermissions(plus, osAndroidAPILevel)
+    if (result.granted) {
+      permissionMessage.value = ''
+      return true
+    }
+
+    permissionMessage.value = '请授予附近设备权限后重试'
+    if (result.deniedAlways) {
+      uni.showModal({
+        title: '需要蓝牙权限',
+        content: '请在系统设置中允许附近设备权限，才能连接车辆。',
+        confirmText: '打开设置',
+        success: ({ confirm }) => {
+          if (confirm) uni.openAppAuthorizeSetting()
+        },
+      })
+    }
+    return false
+  } catch (error) {
+    permissionMessage.value = error?.message ?? error?.errMsg ?? '蓝牙权限申请失败'
+    return false
+  }
+  // #endif
+
+  return true
+}
+
+async function connectVehicle() {
+  if (!controller || !(await ensureBluetoothPermissions())) return false
+  return controller.connect()
+}
+
 function retry() {
-  if (controller) void controller.retry()
+  void connectVehicle()
 }
 
 function copyLogs() {
@@ -83,7 +125,7 @@ watch(ready, () => { void sendPendingDeepLink() })
 
 onLoad(() => {
   readAppDeepLink()
-  if (controller) void controller.connect()
+  void connectVehicle()
 })
 
 onShow(() => {

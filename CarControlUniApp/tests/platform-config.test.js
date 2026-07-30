@@ -26,4 +26,19 @@ describe('platform configuration', () => {
     expect(ios.deploymentTarget).toBe('12.0')
     expect(ios.privacyDescription.NSBluetoothAlwaysUsageDescription).toContain('RM3')
   })
+
+  it('declares every Android permission required for BLE discovery and connection', () => {
+    const manifest = parse(readFileSync(manifestPath, 'utf8'))
+    const permissions = manifest['app-plus'].distribute.android.permissions.join('\n')
+
+    for (const permission of [
+      'android.permission.BLUETOOTH',
+      'android.permission.BLUETOOTH_ADMIN',
+      'android.permission.BLUETOOTH_SCAN',
+      'android.permission.BLUETOOTH_CONNECT',
+      'android.permission.ACCESS_FINE_LOCATION',
+    ]) {
+      expect(permissions).toContain(permission)
+    }
+  })
 })
