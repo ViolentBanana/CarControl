@@ -4,7 +4,7 @@ defineProps({
   lines: { type: Array, default: () => [] },
 })
 
-defineEmits(['close'])
+defineEmits(['close', 'copy'])
 
 function formatTime(timestamp) {
   if (!timestamp) return ''
@@ -17,7 +17,10 @@ function formatTime(timestamp) {
     <view class="panel" @click.stop>
       <view class="panel-header">
         <text class="panel-title">连接日志</text>
-        <button class="done-button" @click="$emit('close')">完成</button>
+        <view class="panel-actions">
+          <button class="copy-button" :disabled="!lines.length" @click="$emit('copy')">复制全部</button>
+          <button class="done-button" @click="$emit('close')">完成</button>
+        </view>
       </view>
       <scroll-view class="log-scroll" scroll-y>
         <view v-if="!lines.length" class="empty-state">
@@ -40,8 +43,10 @@ function formatTime(timestamp) {
 .panel { width: 100%; max-height: 68vh; padding-bottom: env(safe-area-inset-bottom); background: #13161b; border-radius: 22px 22px 0 0; box-shadow: 0 -20px 60px rgba(0,0,0,.4); }
 .panel-header { display: flex; align-items: center; justify-content: space-between; box-sizing: border-box; min-height: 58px; padding: 8px 18px; border-bottom: 1px solid rgba(255,255,255,.07); }
 .panel-title { color: #fff; font-size: 17px; font-weight: 720; }
-.done-button { min-width: 44px; min-height: 44px; margin: 0; padding: 0 8px; color: #40d184; background: transparent; font-size: 15px; font-weight: 650; }
-.done-button::after { border: none; }
+.panel-actions { display: flex; align-items: center; gap: 4px; }
+.copy-button, .done-button { min-width: 44px; min-height: 44px; margin: 0; padding: 0 8px; color: #40d184; background: transparent; font-size: 15px; font-weight: 650; }
+.copy-button::after, .done-button::after { border: none; }
+.copy-button[disabled] { opacity: .45; }
 .log-scroll { height: 42vh; }
 .empty-state { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 12px; min-height: 180px; color: rgba(255,255,255,.52); font-size: 15px; }
 .empty-icon { font-size: 28px; }

@@ -10,5 +10,5 @@ export function isTargetDevice(device) {
 }
 
 export function stringToArrayBuffer(value) {
-  return new TextEncoder().encode(value).buffer
+  return Uint8Array.from(value, (character) => character.charCodeAt(0)).buffer
 }

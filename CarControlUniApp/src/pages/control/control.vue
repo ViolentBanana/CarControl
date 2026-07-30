@@ -9,6 +9,7 @@ import { createVehicleController } from '../../composables/useVehicleController.
 import { VehicleCommand, commandFromValue } from '../../domain/vehicle-command.js'
 import { createControlState, statusText } from '../../domain/vehicle-control-state.js'
 import { createBluetoothService } from '../../services/bluetooth-service.js'
+import { formatLogLines } from '../../utils/log-export.js'
 
 const unsupportedState = ref(createControlState('unavailable', {
   message: '当前平台不支持蓝牙控制',
@@ -44,6 +45,19 @@ function isBusy(key) {
 
 function retry() {
   if (controller) void controller.retry()
+}
+
+function copyLogs() {
+  const data = formatLogLines(logs.value)
+  if (!data) return
+  uni.setClipboardData({
+    data,
+    success: () => uni.showToast({ title: '日志已复制', icon: 'success' }),
+    fail: (error) => uni.showToast({
+      title: error?.errMsg ?? '复制失败',
+      icon: 'none',
+    }),
+  })
 }
 
 function queueDeepLink(rawUrl = '') {
@@ -144,7 +158,7 @@ onUnload(() => controller?.dispose())
 
     </view>
 
-    <DebugLogPanel :open="showLogs" :lines="logs" @close="showLogs = false" />
+    <DebugLogPanel :open="showLogs" :lines="logs" @copy="copyLogs" @close="showLogs = false" />
   </view>
 </template>
 

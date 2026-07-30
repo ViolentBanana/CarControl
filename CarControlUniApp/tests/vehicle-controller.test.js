@@ -215,9 +215,14 @@ describe('vehicle controller', () => {
     expect(controller.isControllable.value).toBe(false)
   })
 
-  it('sends MSF once and blocks a duplicate while sending', async () => {
+  it('prefers write when a control characteristic supports both write modes', async () => {
     const pendingWrite = deferred()
-    const service = createFakeService({ write: vi.fn(() => pendingWrite.promise) })
+    const service = createFakeService({
+      getCharacteristics: vi.fn().mockResolvedValue({
+        characteristics: [{ uuid: 'C1', properties: { write: true, writeNoResponse: true } }],
+      }),
+      write: vi.fn(() => pendingWrite.promise),
+    })
     const controller = createVehicleController(service, createScheduler())
     await becomeReady(controller, service)
 
@@ -227,12 +232,31 @@ describe('vehicle controller', () => {
     expect(controller.state.value.phase).toBe('sending')
     expect(duplicate).toBe(false)
     expect(service.write).toHaveBeenCalledTimes(1)
-    expect(service.write).toHaveBeenCalledWith(expect.objectContaining({ value: 'MSF' }))
+    expect(service.write).toHaveBeenCalledWith(expect.objectContaining({
+      value: 'MSF',
+      writeType: 'write',
+    }))
 
     pendingWrite.resolve({})
     expect(await first).toBe(true)
     expect(controller.state.value.phase).toBe('ready')
     expect(controller.lastResult.value).toMatchObject({ command: 'lock', ok: true })
+  })
+
+  it('uses writeNoResponse for a control characteristic that only supports it', async () => {
+    const service = createFakeService({
+      getCharacteristics: vi.fn().mockResolvedValue({
+        characteristics: [{ uuid: 'C1', properties: { writeNoResponse: true } }],
+      }),
+    })
+    const controller = createVehicleController(service, createScheduler())
+    await becomeReady(controller, service)
+
+    expect(await controller.sendCommand(VehicleCommand.lock)).toBe(true)
+    expect(service.write).toHaveBeenCalledWith(expect.objectContaining({
+      value: 'MSF',
+      writeType: 'writeNoResponse',
+    }))
   })
 
   it('ignores stale scan and connection generations', async () => {

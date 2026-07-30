@@ -141,4 +141,14 @@ describe('vehicle control interface', () => {
   it('reserves the native status bar above the custom header', () => {
     expect(source('pages/control/control.vue')).toContain('var(--status-bar-height)')
   })
+
+  it('offers copying all connection logs from the log panel', () => {
+    const page = source('pages/control/control.vue')
+    const log = source('components/DebugLogPanel.vue')
+
+    expect(log).toContain('复制全部')
+    expect(log).toContain(':disabled="!lines.length"')
+    expect(log).toContain('@click="$emit(\'copy\')"')
+    expect(page).toContain('@copy="copyLogs"')
+  })
 })

@@ -162,9 +162,10 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
         deviceId: device.deviceId,
         serviceId: targetService.uuid,
         characteristicId: characteristic.uuid,
+        writeType: characteristic.properties.write ? 'write' : 'writeNoResponse',
       }
       state.value = createControlState('ready', { deviceName: device.name ?? device.localName ?? '车辆蓝牙' })
-      log(`${state.value.deviceName} 控制通道已就绪`)
+      log(`${state.value.deviceName} 控制通道已就绪（${writableCharacteristic.writeType}）`)
     } catch (error) {
       if (!disposed && generation === connectionGeneration) {
         const message = error?.errMsg ?? error?.message ?? '连接车辆失败'

@@ -40,10 +40,28 @@ describe('bluetooth service', () => {
       serviceId: 'FFF0',
       characteristicId: 'C1',
       value: 'MSF',
+      writeType: 'write',
     })
 
     expect(fakeUni.openBluetoothAdapter).toHaveBeenCalledOnce()
     expect(fakeUni.writeBLECharacteristicValue).toHaveBeenCalledOnce()
+    expect([...new Uint8Array(fakeUni.lastWrite.value)]).toEqual([77, 83, 70])
+    expect(fakeUni.lastWrite.writeType).toBe('write')
+  })
+
+  it('forwards writeNoResponse to the native BLE API', async () => {
+    const fakeUni = createFakeUni()
+    const service = createBluetoothService(fakeUni)
+
+    await service.write({
+      deviceId: 'D1',
+      serviceId: 'FFF0',
+      characteristicId: 'C1',
+      value: 'MSF',
+      writeType: 'writeNoResponse',
+    })
+
+    expect(fakeUni.lastWrite.writeType).toBe('writeNoResponse')
     expect([...new Uint8Array(fakeUni.lastWrite.value)]).toEqual([77, 83, 70])
   })
 

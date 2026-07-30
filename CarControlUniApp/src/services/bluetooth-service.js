@@ -29,10 +29,10 @@ export function createBluetoothService(api = uni) {
       deviceId,
       serviceId,
     }),
-    write: ({ deviceId, serviceId, characteristicId, value }) => call(
+    write: ({ deviceId, serviceId, characteristicId, value, writeType }) => call(
       api,
       'writeBLECharacteristicValue',
-      { deviceId, serviceId, characteristicId, value: stringToArrayBuffer(value) },
+      { deviceId, serviceId, characteristicId, value: stringToArrayBuffer(value), writeType },
     ),
     onDeviceFound(listener) {
       foundListeners.add(listener)
