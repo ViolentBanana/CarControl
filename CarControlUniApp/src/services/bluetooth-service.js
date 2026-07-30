@@ -8,13 +8,12 @@ function readAndroidBondedDevices(nativeRuntime) {
   if (!nativeRuntime?.android) return []
 
   const { android } = nativeRuntime
-  const Context = android.importClass('android.content.Context')
-  const activity = android.runtimeMainActivity()
-  const manager = activity.getSystemService(Context.BLUETOOTH_SERVICE)
-  android.importClass(manager)
-  const adapter = manager.getAdapter()
+  const BluetoothAdapter = android.importClass('android.bluetooth.BluetoothAdapter')
+  const adapter = BluetoothAdapter.getDefaultAdapter()
+  if (!adapter) return []
   android.importClass(adapter)
   const bondedDevices = adapter.getBondedDevices()
+  if (!bondedDevices) return []
   android.importClass(bondedDevices)
   const iterator = bondedDevices.iterator()
   android.importClass(iterator)

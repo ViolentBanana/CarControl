@@ -275,21 +275,27 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
       }
       const knownDevice = connectedDevices[0]
       if (knownDevice) {
-        await discover(knownDevice, ownConnectionGeneration)
+        await discover(knownDevice, ownConnectionGeneration, true)
         return state.value.phase === 'ready'
       }
 
       log('检查系统已配对的 RM0-LOCK')
-      const bonded = await service.getBonded()
+      let bondedDevices = []
+      try {
+        const bonded = await service.getBonded()
+        bondedDevices = bonded.devices ?? []
+        for (const device of bondedDevices) log(`系统已配对：${deviceDescription(device)}`)
+      } catch (error) {
+        log(`读取系统配对设备失败：${errorDescription(error) || '未知错误'}，继续扫描`)
+      }
       if (disposed || ownScanGeneration !== scanGeneration) return false
-      const bondedDevices = bonded.devices ?? []
-      for (const device of bondedDevices) log(`系统已配对：${deviceDescription(device)}`)
+
       const bondedRm0 = bondedDevices.find((device) => (
         (device.name ?? device.localName ?? '').toUpperCase().includes('RM0')
       ))
       if (bondedRm0) {
-        log(`使用已配对 RM0 建立控制连接：${deviceDescription(bondedRm0)}`)
-        await discover(bondedRm0, ownConnectionGeneration)
+        log(`使用系统配对 RM0 建立 FFF0 连接：${deviceDescription(bondedRm0)}`)
+        await discover(bondedRm0, ownConnectionGeneration, true)
         return state.value.phase === 'ready'
       }
 

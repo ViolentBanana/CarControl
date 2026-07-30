@@ -50,20 +50,16 @@ function createFakePlus() {
       iterator: () => iterator,
     }),
   }
-  const manager = {
-    getAdapter: () => adapter,
-  }
-
   return {
     android: {
       importClass: vi.fn((name) => (
-        name === 'android.content.Context'
-          ? { BLUETOOTH_SERVICE: 'bluetooth' }
+        name === 'android.bluetooth.BluetoothAdapter'
+          ? { getDefaultAdapter: () => adapter }
           : name
       )),
-      runtimeMainActivity: vi.fn(() => ({
-        getSystemService: () => manager,
-      })),
+      runtimeMainActivity: vi.fn(() => {
+        throw new Error('不应通过 Context 获取蓝牙适配器')
+      }),
     },
   }
 }
@@ -122,7 +118,7 @@ describe('bluetooth service', () => {
     expect(fakeUni.offBLEConnectionStateChange).toHaveBeenCalledOnce()
   })
 
-  it('returns Android system-paired devices so RM0 can be connected by address', async () => {
+  it('reads Android paired devices directly from the default Bluetooth adapter', async () => {
     const service = createBluetoothService(createFakeUni(), createFakePlus())
 
     expect(typeof service.getBonded).toBe('function')

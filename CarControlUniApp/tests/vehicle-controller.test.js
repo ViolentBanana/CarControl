@@ -96,7 +96,7 @@ describe('vehicle controller', () => {
     })
   })
 
-  it('connects paired RM0 before scanning RM3 when Android reports no connected GATT device', async () => {
+  it('connects the system-paired RM0 by address when no FFF0 device is returned', async () => {
     const service = createFakeService({
       getBonded: vi.fn().mockResolvedValue({
         devices: [
@@ -116,7 +116,22 @@ describe('vehicle controller', () => {
       phase: 'ready',
       deviceName: 'RM0-LOCK',
     })
+    expect(service.connect).toHaveBeenCalledWith('AA:BB:CC:DD:EE:FF')
     expect(service.startScan).not.toHaveBeenCalled()
+  })
+
+  it('continues BLE scanning when reading Android paired devices fails', async () => {
+    const service = createFakeService({
+      getBonded: vi.fn().mockRejectedValue(new Error('读取系统配对列表失败')),
+    })
+    const controller = createVehicleController(service, createScheduler())
+
+    expect(await controller.connect()).toBe(true)
+    expect(controller.state.value.phase).toBe('scanning')
+    expect(service.startScan).toHaveBeenCalledOnce()
+    expect(controller.logs.value.map(({ message }) => message)).toContain(
+      '读取系统配对设备失败：读取系统配对列表失败，继续扫描',
+    )
   })
 
   it('starts scanning when the connected-device query does not return', async () => {
