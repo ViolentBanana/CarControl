@@ -29,6 +29,45 @@ function createFakeUni() {
   return api
 }
 
+function createFakePlus() {
+  const devices = [
+    {
+      getName: () => 'Headphones',
+      getAddress: () => '11:22:33:44:55:66',
+    },
+    {
+      getName: () => 'RM0-LOCK',
+      getAddress: () => 'AA:BB:CC:DD:EE:FF',
+    },
+  ]
+  let index = 0
+  const iterator = {
+    hasNext: () => index < devices.length,
+    next: () => devices[index++],
+  }
+  const adapter = {
+    getBondedDevices: () => ({
+      iterator: () => iterator,
+    }),
+  }
+  const manager = {
+    getAdapter: () => adapter,
+  }
+
+  return {
+    android: {
+      importClass: vi.fn((name) => (
+        name === 'android.content.Context'
+          ? { BLUETOOTH_SERVICE: 'bluetooth' }
+          : name
+      )),
+      runtimeMainActivity: vi.fn(() => ({
+        getSystemService: () => manager,
+      })),
+    },
+  }
+}
+
 describe('bluetooth service', () => {
   it('converts callback operations and command text', async () => {
     const fakeUni = createFakeUni()
@@ -81,5 +120,27 @@ describe('bluetooth service', () => {
     expect(changed).toHaveBeenCalledWith({ deviceId: 'D1', connected: false })
     expect(fakeUni.offBluetoothDeviceFound).toHaveBeenCalledOnce()
     expect(fakeUni.offBLEConnectionStateChange).toHaveBeenCalledOnce()
+  })
+
+  it('returns Android system-paired devices so RM0 can be connected by address', async () => {
+    const service = createBluetoothService(createFakeUni(), createFakePlus())
+
+    expect(typeof service.getBonded).toBe('function')
+    await expect(service.getBonded()).resolves.toEqual({
+      devices: [
+        {
+          deviceId: '11:22:33:44:55:66',
+          name: 'Headphones',
+          localName: 'Headphones',
+          bonded: true,
+        },
+        {
+          deviceId: 'AA:BB:CC:DD:EE:FF',
+          name: 'RM0-LOCK',
+          localName: 'RM0-LOCK',
+          bonded: true,
+        },
+      ],
+    })
   })
 })

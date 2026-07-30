@@ -42,6 +42,7 @@ function createFakeService(overrides = {}) {
   const service = {
     open: vi.fn().mockResolvedValue({}),
     getConnected: vi.fn().mockResolvedValue({ devices: [] }),
+    getBonded: vi.fn().mockResolvedValue({ devices: [] }),
     startScan: vi.fn().mockResolvedValue({}),
     stopScan: vi.fn().mockResolvedValue({}),
     connect: vi.fn().mockResolvedValue({}),
@@ -93,6 +94,29 @@ describe('vehicle controller', () => {
       phase: 'ready',
       deviceName: 'RM0-LOCK',
     })
+  })
+
+  it('connects paired RM0 before scanning RM3 when Android reports no connected GATT device', async () => {
+    const service = createFakeService({
+      getBonded: vi.fn().mockResolvedValue({
+        devices: [
+          {
+            deviceId: 'AA:BB:CC:DD:EE:FF',
+            name: 'RM0-LOCK',
+            localName: 'RM0-LOCK',
+            bonded: true,
+          },
+        ],
+      }),
+    })
+    const controller = createVehicleController(service, createScheduler())
+
+    expect(await controller.connect()).toBe(true)
+    expect(controller.state.value).toMatchObject({
+      phase: 'ready',
+      deviceName: 'RM0-LOCK',
+    })
+    expect(service.startScan).not.toHaveBeenCalled()
   })
 
   it('starts scanning when the connected-device query does not return', async () => {

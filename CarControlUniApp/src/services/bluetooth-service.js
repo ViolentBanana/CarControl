@@ -4,7 +4,37 @@ const call = (api, method, options = {}) => new Promise((resolve, reject) => {
   api[method]({ ...options, success: resolve, fail: reject })
 })
 
-export function createBluetoothService(api = uni) {
+function readAndroidBondedDevices(nativeRuntime) {
+  if (!nativeRuntime?.android) return []
+
+  const { android } = nativeRuntime
+  const Context = android.importClass('android.content.Context')
+  const activity = android.runtimeMainActivity()
+  const manager = activity.getSystemService(Context.BLUETOOTH_SERVICE)
+  android.importClass(manager)
+  const adapter = manager.getAdapter()
+  android.importClass(adapter)
+  const bondedDevices = adapter.getBondedDevices()
+  android.importClass(bondedDevices)
+  const iterator = bondedDevices.iterator()
+  android.importClass(iterator)
+
+  const devices = []
+  while (iterator.hasNext()) {
+    const device = iterator.next()
+    android.importClass(device)
+    const name = device.getName() ?? ''
+    devices.push({
+      deviceId: device.getAddress(),
+      name,
+      localName: name,
+      bonded: true,
+    })
+  }
+  return devices
+}
+
+export function createBluetoothService(api = uni, nativeRuntime = globalThis.plus) {
   const foundListeners = new Set()
   const connectionListeners = new Set()
   const foundHandler = (result) => {
@@ -20,6 +50,7 @@ export function createBluetoothService(api = uni) {
   return {
     open: () => call(api, 'openBluetoothAdapter'),
     getConnected: (services = ['FFF0']) => call(api, 'getConnectedBluetoothDevices', { services }),
+    getBonded: async () => ({ devices: readAndroidBondedDevices(nativeRuntime) }),
     startScan: () => call(api, 'startBluetoothDevicesDiscovery', { allowDuplicatesKey: false }),
     stopScan: () => call(api, 'stopBluetoothDevicesDiscovery'),
     connect: (deviceId) => call(api, 'createBLEConnection', { deviceId, timeout: 10000 }),

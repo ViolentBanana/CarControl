@@ -275,7 +275,21 @@ export function createVehicleController(service, scheduler = defaultScheduler) {
       }
       const knownDevice = connectedDevices[0]
       if (knownDevice) {
-        await discover(knownDevice, ownConnectionGeneration, true)
+        await discover(knownDevice, ownConnectionGeneration)
+        return state.value.phase === 'ready'
+      }
+
+      log('检查系统已配对的 RM0-LOCK')
+      const bonded = await service.getBonded()
+      if (disposed || ownScanGeneration !== scanGeneration) return false
+      const bondedDevices = bonded.devices ?? []
+      for (const device of bondedDevices) log(`系统已配对：${deviceDescription(device)}`)
+      const bondedRm0 = bondedDevices.find((device) => (
+        (device.name ?? device.localName ?? '').toUpperCase().includes('RM0')
+      ))
+      if (bondedRm0) {
+        log(`使用已配对 RM0 建立控制连接：${deviceDescription(bondedRm0)}`)
+        await discover(bondedRm0, ownConnectionGeneration)
         return state.value.phase === 'ready'
       }
 
